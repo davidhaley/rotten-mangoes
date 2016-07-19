@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+
   def index
     @movies = Movie.all
   end
@@ -8,7 +9,7 @@ class MoviesController < ApplicationController
   end
 
   def new
-    @movie = Movie.new  
+    @movie = Movie.new
   end
 
   def edit
@@ -16,7 +17,7 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.find(params[:id])
+    @movie = Movie.new(movie_params)
 
     if @movie.save
       redirect_to movies_path
@@ -29,7 +30,7 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
 
     if @movie.update_attributes(movie_params)
-      redirect_to movie_path (@movie)
+      redirect_to movie_path(@movie)
     else
       render :edit
     end
