@@ -1,0 +1,12 @@
+<%= link_to "Back to All Movies", movies_path %>
+
+<h2>Administrator User Panel</h2>
+<% @users.each do |user| %>
+  <ul>
+    <li>First Name: <%= user.firstname %></li>
+    <li>Last Name: <%= user.lastname %></li>
+    <li>Email: <%= user.email %></li>
+    <li>Date Account Created: <%= formatted_date(user.created_at) %></li>
+    <li>Admin: <%= user.admin ? "Yes" : "No" %>
+  </ul>
+<% end %>

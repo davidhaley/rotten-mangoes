@@ -4,16 +4,16 @@
 <h2><%= @movie.title %> (<%= link_to "edit", edit_movie_path(@movie) %>, <%= link_to "delete", movie_path(@movie), method: :delete, confirm: "Are you sure?" %>)</h2>
 <h3><%= formatted_date(@movie.release_date) %></h3>
 <h4>Dir. <%= @movie.director %> | <%= @movie.runtime_in_minutes %> minutes</h4>
-<h4>Review Average: <%= @movie.review_average %></h4>
+<h4>Review Average: <%= @movie.reviews.size > 0 ? @movie.review_average : flash.now[:notice] = "This movie has no reviews." %></h4>
 <p><%= @movie.description %></p>
 
 
 <hr>
 
 <% if @movie.reviews.size == 0 %>
-<h4><%= flash.now[:notice] = "This movie has no reviews." %>
+<h4><%= link_to "Write a review!", new_movie_review_path(movie_id: @movie.id) %></h4>
 <% else %>
-<h3>Reviews of <em><%= @movie.title %></em></h3>
+<h3>Reviews of <em><%= @movie.title unless @movie.reviews.size == 0 %></em></h3>
   <% if current_user %>
   <% @movie.reviews.each do |review| %>
     <p><%= review.text %></p>
