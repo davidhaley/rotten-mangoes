@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+RottenMangoes::Application.routes.draw do
 
   get 'reviews/new'
 
@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
-
+  root to: 'movies#index'
 end
