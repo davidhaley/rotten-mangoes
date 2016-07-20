@@ -2,6 +2,8 @@ class Movie < ApplicationRecord
 
   has_many :reviews
 
+  mount_uploader :image, ImageUploader
+
   validates :title,
     presence: true
 
@@ -14,7 +16,7 @@ class Movie < ApplicationRecord
   validates :description,
     presence: true
 
-  validates :poster_image_url,
+  validates :image,
     presence: true
 
   validates :release_date,
