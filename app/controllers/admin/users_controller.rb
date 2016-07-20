@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_filter :authorized?
 
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(10)
     if authorized?
       render :index
     else
