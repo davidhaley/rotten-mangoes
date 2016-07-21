@@ -15,8 +15,8 @@ class MoviesController < ApplicationController
       flash.now[:notice] = "There are no movies in the database based on your search criteria." if @movies.empty?
     end
 
-    filtering_params(params).each do |key, value|
-      @movies = @movies.public_send(key, value) if value.present?
+    if params[:query]
+      @movies = @movies.query(params[:query])
     end
   end
 

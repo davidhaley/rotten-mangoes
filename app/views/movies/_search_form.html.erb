@@ -1,8 +1,7 @@
 <table>
   <%= form_tag(movies_path, method: :get) do %>
   <tr><td><%= label_tag(:query, "Search for:") %></td></tr>
-  <tr><td><%= text_field_tag(:title, nil, placeholder: "Title") %></td></tr>
-  <tr><td><%= text_field_tag(:director, nil, placeholder: "Director") %></td></tr>
+  <tr><td><%= text_field_tag(:query, nil, placeholder: "Title or Director") %></td></tr>
   <tr><td><%= select_tag(:runtime_in_minutes, "<option value='under_90_minutes'> Under 90 minutes </option>
           <option value='between_90_and_120_minutes'> Between 90 Minutes & 120 Minutes </option>
           <option value='greater_than_120_minutes'> Over 120 Minutes </option>".html_safe, prompt: "Duration") %></td></tr>

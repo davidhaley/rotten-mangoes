@@ -12,8 +12,7 @@ class Movie < ApplicationRecord
   validates :release_date, presence: true
   validate :release_date_is_in_the_past
 
-  scope :title, -> (title) { where("title like ?", "#{title}%") }
-  scope :director, -> (director) { where("director like ?", "#{director}%") }
+  scope :query, -> (query) { where("title like ? OR director like ?", "#{query}%", "#{query}%") }
 
   def review_average
     reviews.sum(:rating_out_of_ten)/reviews.size unless reviews.size == 0
