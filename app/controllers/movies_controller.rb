@@ -2,6 +2,22 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+
+    if params[:runtime_in_minutes]
+      range = params[:runtime_in_minutes]
+      if range == "under_90_minutes"
+        @movies = @movies.where('runtime_in_minutes < ?', "#{90}")
+      elsif range == "between_90_and_120_minutes"
+        @movies = @movies.where('runtime_in_minutes BETWEEN ? AND ?', "#{90}", "#{120}")
+      elsif range == "greater_than_120_minutes"
+        @movies = @movies.where('runtime_in_minutes > ?', "#{120}")
+      end
+      flash.now[:notice] = "There are no movies in the database based on your search criteria." if @movies.empty?
+    end
+
+    filtering_params(params).each do |key, value|
+      @movies = @movies.public_send(key, value) if value.present?
+    end
   end
 
   def show
@@ -43,6 +59,11 @@ class MoviesController < ApplicationController
   end
 
   protected
+
+  # A list of the param names that can be used for filtering the Movie list.
+  def filtering_params(params)
+    params.slice(:title, :director)
+  end
 
   def movie_params
     params.require(:movie).permit(
