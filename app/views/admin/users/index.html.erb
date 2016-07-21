@@ -16,6 +16,7 @@
       <td><%= user.email %></td>
       <td><%= formatted_date(user.created_at) %></td>
       <td><%= user.admin ? "Yes" : "No" %></td>
+      <td><%= button_to "Delete", admin_user_path(user), method: :delete, confirm: 'Are You Sure?'%> <!-- TODO: Fix confirm (not working) -->
     </tr>
     <% end %>
   </table>
