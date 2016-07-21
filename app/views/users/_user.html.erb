@@ -1,0 +1,10 @@
+<%= form_for(user) do |f| %>
+<h3><%= user.firstname %> <%= user.lastname %></h3>
+<h4>Email: <%= user.email %></h4>
+<h4>Account Created:  <%= formatted_date(user.created_at)  %></h4>
+<h4># of Reviews: <%= user.reviews.count %></h4>
+<h5><% user.movies.each do |movie| %></h5>
+<h5><%= link_to movie.title, movie_path %></h5>
+  <% end %>
+<% end %>
+<hr>
